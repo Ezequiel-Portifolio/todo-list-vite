@@ -1,4 +1,5 @@
 import { useState } from "react";
+import TodoForm from "./components/TodoForm";
 
 type Todo = {
   id: number;
@@ -18,16 +19,36 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
   return (
     <div>
       <h1>Minha lista de tarefas</h1>
-      <button onClick={() => addTodo("Nova tarefa")}>
-        Adicionar Tarefa Teste
-      </button>
+
+      <TodoForm onAdd={addTodo} />
+
       <p>Total de tarefas: {todos.length}</p>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.text}</li>
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+            />
+            {todo.text}
+            <button onClick={() => deleteTodo(todo.id)}>🗑️</button>
+          </li>
         ))}
       </ul>
     </div>
