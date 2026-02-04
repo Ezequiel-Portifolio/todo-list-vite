@@ -1,9 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-function TodoForm({ onAdd}) {
+type TodoFormProps = {
+    onAdd: (text: string) => void;
+}
+
+function TodoForm({ onAdd}: TodoFormProps) {
     const [text, setText] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (text.trim() === "") return;
