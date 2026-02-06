@@ -41,12 +41,16 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => toggleTodo(todo.id)}
-            />
-            {todo.text}
+            <label style={{ cursor: "pointer"}}>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => toggleTodo(todo.id)}
+                />
+                <span style={{ textDecoration: todo.completed ? "line-through" : "none", color: todo.completed ? "gray" : "black", marginLeft: "8px" }}>
+                {todo.text}
+                </span>
+            </label>
             <button onClick={() => deleteTodo(todo.id)}>🗑️</button>
           </li>
         ))}
