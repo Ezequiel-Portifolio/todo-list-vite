@@ -1,42 +1,174 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+:root {
+  --primary-color: #646cff;
+  --primary-hover: #535bf2;
+  --bg-color: #f9f9f9;
+  --card-bg: #ffffff;
+  --text-color: #213547;
+  --text-secondary: #888;
+  --danger-color: #ff4d4d;
+  --success-color: #4caf50;
+  --border-radius: 8px;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 500px;
+  width: 90%;
+  margin: 2rem auto;
   padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+h1 {
   text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Form Styles */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="text"] {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+input[type="text"]:focus {
+  border-color: var(--primary-color);
 }
 
-.card {
-  padding: 2em;
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.read-the-docs {
-  color: #888;
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Filter Styles */
+.filters-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.filter-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  font-size: 0.9rem;
+}
+
+.filter-btn:hover {
+  background: #f0f0f0;
+  color: var(--primary-color);
+}
+
+.filter-btn.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* List Styles */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.todo-item:hover {
+  background-color: #fafafa;
+}
+
+.todo-item label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex: 1;
+}
+
+.todo-text {
+  margin-left: 12px;
+  transition: all 0.2s;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.delete-btn {
+  background: transparent;
+  font-size: 1.2rem;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #fff0f0;
+  border-radius: 50%;
+}
+
+.clear-completed {
+  display: block;
+  margin: 1.5rem auto 0;
+  background-color: transparent;
+  color: var(--danger-color);
+  font-size: 0.85rem;
+  border: 1px solid var(--danger-color);
+}
+
+.clear-completed:hover {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.stats {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
 }

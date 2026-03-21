@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
-import { type Todo } from "./types";
+import { type Todo, type FilterType } from "./types";
+import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => {
     const savedTodos = localStorage.getItem("todo-list-vite-tasks");
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
+
+  const [filter, setFilter] = useState<FilterType>("all");
 
   useEffect(() => {
     localStorage.setItem("todo-list-vite-tasks", JSON.stringify(todos));
@@ -34,15 +37,55 @@ function App() {
     );
   };
 
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
+
   return (
-    <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
+    <div className="app-container">
       <h1>Minha lista de tarefas</h1>
 
       <TodoForm onAdd={addTodo} />
 
-      <p>Total de tarefas: {todos.length}</p>
+      <div className="filters-container">
+        <button
+          className={`filter-btn ${filter === "all" ? "active" : ""}`}
+          onClick={() => setFilter("all")}
+        >
+          Todas
+        </button>
+        <button
+          className={`filter-btn ${filter === "active" ? "active" : ""}`}
+          onClick={() => setFilter("active")}
+        >
+          Ativas
+        </button>
+        <button
+          className={`filter-btn ${filter === "completed" ? "active" : ""}`}
+          onClick={() => setFilter("completed")}
+        >
+          Concluídas
+        </button>
+      </div>
 
-      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+      <div className="stats">Total exibido: {filteredTodos.length}</div>
+
+      <TodoList
+        todos={filteredTodos}
+        onToggle={toggleTodo}
+        onDelete={deleteTodo}
+      />
+
+      {todos.some((todo) => todo.completed) && (
+        <button
+          className="clear-completed"
+          onClick={() => setTodos(todos.filter((t) => !t.completed))}
+        >
+          Limpar concluídas
+        </button>
+      )}
     </div>
   );
 }

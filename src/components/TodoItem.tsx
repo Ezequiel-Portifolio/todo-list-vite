@@ -8,36 +8,18 @@ type TodoItemProps = {
 
 function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
-    <li
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "10px",
-        marginBottom: "8px",
-      }}
-    >
-      <label
-        style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
-      >
+    <li className="todo-item">
+      <label>
         <input
           type="checkbox"
           checked={todo.completed}
           onChange={() => onToggle(todo.id)}
         />
-        <span
-          style={{
-            textDecoration: todo.completed ? "line-through" : "none",
-            color: todo.completed ? "gray" : "black",
-            marginLeft: "8px",
-          }}
-        >
+        <span className={`todo-text ${todo.completed ? "completed" : ""}`}>
           {todo.text}
         </span>
       </label>
-      <button
-        onClick={() => onDelete(todo.id)}
-        style={{ background: "transparent", border: "none", cursor: "pointer" }}
-      >
+      <button className="delete-btn" onClick={() => onDelete(todo.id)}>
         🗑️
       </button>
     </li>

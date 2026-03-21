@@ -9,11 +9,11 @@ type TodoListProps = {
 
 function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
   if (todos.length === 0) {
-    return <p>Nenhuma tarefa por aqui! 🎉</p>;
+    return <p className="stats">Nenhuma tarefa por aqui! 🎉</p>;
   }
 
   return (
-    <ul style={{ listStyle: "none", padding: 0 }}>
+    <ul>
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
