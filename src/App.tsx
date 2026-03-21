@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
-import { Todo } from "./types";
+import { type Todo } from "./types";
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const savedTodos = localStorage.getItem("todo-list-vite-tasks");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todo-list-vite-tasks", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (text: string) => {
     const newTodo: Todo = {
