@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# ✅ Todo List - Vite + React + TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um gerenciador de tarefas moderno, rápido e funcional desenvolvido com **React 19**, **Vite** e **TypeScript**. Este projeto foi refatorado para seguir as melhores práticas de componentização e organização de código.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades
 
-## React Compiler
+- **Gerenciamento de Tarefas**: Adicione, edite, marque como concluído ou exclua tarefas rapidamente.
+- **Persistência Local**: Seus dados ficam salvos no seu navegador (**LocalStorage**), então você não perde nada ao atualizar a página.
+- **Filtros Inteligentes**: Visualize apenas as tarefas que importam (Todas, Ativas ou Concluídas).
+- **Limpeza Rápida**: Botão dedicado para remover todas as tarefas concluídas de uma só vez.
+- **Interface Moderna**: Design limpo, responsivo e com feedback visual instantâneo.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React 19](https://react.dev/) - Biblioteca para interfaces de usuário.
+- [Vite](https://vitejs.dev/) - Build tool extremamente rápido.
+- [TypeScript](https://www.typescriptlang.org/) - Tipagem estática para maior segurança e produtividade.
+- [CSS3](https://developer.mozilla.org/pt-BR/docs/Web/CSS) - Estilização moderna com variáveis e design system minimalista.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📂 Estrutura do Projeto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+A estrutura de pastas foi organizada para separar responsabilidades e facilitar a escalabilidade:
+
+```text
+src/
+├── assets/          # Arquivos estáticos (imagens, ícones)
+├── components/      # Componentes reutilizáveis do sistema
+│   ├── TodoForm.tsx # Formulário de adição de tarefas
+│   ├── TodoItem.tsx # Item individual com lógica de edição e toggle
+│   └── TodoList.tsx # Listagem e iteração das tarefas
+├── App.css          # Estilização global e variáveis CSS
+├── App.tsx          # Orquestrador de estado e layout principal
+├── types.ts         # Definições de tipos (interfaces) TypeScript
+├── main.tsx         # Ponto de entrada da aplicação
+└── index.css        # Estilos base de reset
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Como Funciona a Lógica
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 💾 Persistência de Dados
+
+Utilizamos o hook `useEffect` para sincronizar o estado `todos` com o `localStorage`. Na inicialização, o `useState` executa uma função de leitura para recuperar os dados salvos anteriormente.
+
+### 🔄 Fluxo de Estado
+
+O estado principal reside no `App.tsx` (Single Source of Truth), sendo distribuído via _props_ para os componentes filhos. Isso garante que a interface reflita o estado real dos dados instantaneamente.
+
+### ✏️ Edição em Tempo Real
+
+Ao clicar no botão de edição, o `TodoItem` alterna para um modo de entrada de texto. A alteração é confirmada ao pressionar `Enter` ou ao perder o foco do campo (`onBlur`).
+
+---
+
+## 🚀 Como Iniciar
+
+1. **Instale as dependências**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Inicie o servidor de desenvolvimento**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Acesse no navegador**:
+   Geralmente em `http://localhost:5173`.
+
+---
+
+## 📋 Próximos Passos (Backlog)
+
+- [ ] Adicionar suporte a categorias ou tags.
+- [ ] Implementar datas de entrega (Deadlines).
+- [ ] Adicionar temas Dark/Light mode.
+- [ ] Implementar animações com Framer Motion.
+
+---
+
+Desenvolvido para fins de aprendizado e produtividade! 🚀
